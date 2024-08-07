@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest --watchAll",
     "coverage": "jest --coverage",
-    "watch": "watchify ./assets/gameLogic/controller.js -o assets/dist/gameBundle.js"
+    "watch": "start watchify ./assets/gameLogic/controller.js -o assets/dist/gameBundle.js && start watchify ./assets/js/characters.js -o ./assets/dist/charactersBundle.js"
   },
   "keywords": [],
   "author": "",

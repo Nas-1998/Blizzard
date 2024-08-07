@@ -7,7 +7,7 @@ class gameState {
     this.lives = 3;
     this.event = [];
     this.eventIndex = 0;
-    this.state = "beforeInit"
+    this.state = "beforeInit";
   }
 
   async fetchForUser() {
@@ -61,11 +61,8 @@ class gameState {
 
       if (response.ok) {
         const data = await response.json();
-        const charImg = data[0].char_image_url;
-        const bgImg = data[0].bg_image_url;
 
         this.event = data;
-
       } else {
         throw new Error("Error: " + response.status);
       }
@@ -79,7 +76,6 @@ class gameState {
       const response = await fetch(
         `https://blizzard-5jur.onrender.com/questions/${id}`
       );
-      console.log("Fetch for questions check")
 
       if (response.ok) {
         const data = await response.json();
@@ -126,8 +122,7 @@ class gameState {
         outcome: outcome,
       }),
     };
-  
-  
+
     const response = await fetch(
       "https://blizzard-5jur.onrender.com/submissions/",
       options
@@ -138,28 +133,23 @@ class gameState {
     }
   }
 
-  checkGameState(){
+  checkGameState() {
     if (this.lives == 0) {
-      this.state = "lost"
-      return
+      this.state = "lost";
+      return;
     }
-    if (this.eventIndex >= this.event.length)
-    {
-      this.state = "won"
-      return
+    if (this.eventIndex >= this.event.length) {
+      this.state = "won";
+      return;
     }
   }
 
-  async init() {
+  async init(characterId) {
     await this.fetchForUser();
-    await this.fetchForCharacter(1);
+    await this.fetchForCharacter(characterId);
     await this.fetchForEvents(this.character.character_id);
     await this.fetchForQuestions(this.event[this.eventIndex].event_id);
     this.state = "running";
-    // console.log("Fetch for Character", this.character);
-    // console.log("Fetch for Events", this.event[this.eventIndex].event_id);
-    // console.log("Event Index", this.eventIndex);
-    // console.log("Fetch for Questions", this.question);
   }
 }
 

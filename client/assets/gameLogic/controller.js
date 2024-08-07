@@ -1,13 +1,12 @@
 const GameState = require("./logic.js");
-const winModal = require("./view/viewWin.js")
-const gameoverModal = require("./view/viewLost.js")
+const winModal = require("./view/viewWin.js");
+const gameoverModal = require("./view/viewLost.js");
 const checkAuth = require("./../utils/checkAuth.js");
 const quizOptions = document.querySelectorAll("#table .option ");
 const questionDescription = document.querySelector(".question-description");
 const answersContainer = document.querySelector(".answers");
 const bgContainer = document.querySelector("#bg-container");
 const charContainer = document.querySelector("#char-img");
-
 
 const game = new GameState();
 
@@ -20,33 +19,28 @@ answersContainer.addEventListener("click", async function (e) {
   // Display answer modal
   //check game state -  if == running then fetchnextquestion, if == loss then show loss modal and if finished events then show win modal
 
-  game.checkGameState()
-  if (game.state === "running"){
-    await game.fetchNextQuestion(); 
+  game.checkGameState();
+
+  console.log(game.state, game.lives);
+  if (game.state === "running") {
+    await game.fetchNextQuestion();
     updateQuestion();
-  }
-  else if (game.state === "lost"){
+  } else if (game.state === "lost") {
     gameoverModal.openModal();
     // trigger loss modal
-  }
-  else if (game.state === "win"){
+  } else if (game.state === "won") {
     winModal.openModal();
     //trigger win modal
   }
-
 });
 
 const updateImgs = () => {
-  const curEvent = game.event[game.eventIndex]
+  const curEvent = game.event[game.eventIndex];
   const char_img = curEvent.char_image_url;
   const bg_img = curEvent.bg_image_url;
-  //  console.log(char_img)
-  //  console.log(first)
-const test = `url(${char_img})`
-console.log("updateimg Teat", test)
+
   bgContainer.style.backgroundImage = `url(${bg_img})`;
   charContainer.style.backgroundImage = `url(${char_img})`;
-  console.log(charContainer)
 };
 
 const updateQuestion = () => {
@@ -61,9 +55,29 @@ const updateQuestion = () => {
   });
 };
 
+const readSeachParams = () => {
+  // Get the current URL
+  const url = window.location.href;
+
+  // Create a URL object
+  const urlObj = new URL(url);
+
+  // Get the search parameters
+  const searchParams = new URLSearchParams(urlObj.search);
+
+  const characterId = searchParams.get("characterId");
+
+  if (!characterId) {
+    window.location.href = "characters.html";
+  }
+
+  return characterId;
+};
+
 (async function () {
   await checkAuth();
-  await game.init();
+  const characterId = readSeachParams();
+  await game.init(characterId);
   updateQuestion();
   updateImgs();
 })();
