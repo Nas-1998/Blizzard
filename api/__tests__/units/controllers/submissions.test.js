@@ -1,67 +1,94 @@
-const express = require("express");
-const request = require("supertest"); 
-const app = express();
-const Submission = require("../../../models/Submission");
-const { create, show } = require("../../../controllers/submissions");
-
-app.use(express.json());
+const { create, show } = require('../../../controllers/submissions');
+const Submission = require('../../../models/Submission');
 
 
-app.get("/questions-stats", show);
-app.post("/submissions", create);
+jest.mock('../../../models/Submission');
 
-
-jest.mock("../../../models/Submission");
-
-describe("Submission Controller", () => {
+describe('Submission Controller', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  describe("GET /questions-stats", () => {
-    it("should return an array of question statistics", async () => {
-      const mockStats = [{ question_id: 1, question_description: "Sample question", percentage_correct: 75 }];
+  describe('show', () => {
+    it('should return an array of question statistics', async () => {
+      const mockStats = [{ question_id: 1, question_description: 'Sample question', percentage_correct: 75 }];
       Submission.getQuestionsStats.mockResolvedValue(mockStats);
 
-      const response = await request(app).get("/questions-stats");
+    
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn()
+      };
 
-      expect(response.status).toBe(200);
-      expect(response.body).toEqual({ stats: mockStats });
+      // Call the controller function
+      await show({}, res);
+
+      // Assertions
+      expect(Submission.getQuestionsStats).toHaveBeenCalled();
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith({ stats: mockStats });
     });
 
-    it("should handle errors", async () => {
-      Submission.getQuestionsStats.mockRejectedValue(new Error("Database error"));
+    it('should handle errors', async () => {
+      const errorMessage = 'Database error';
+      Submission.getQuestionsStats.mockRejectedValue(new Error(errorMessage));
 
-      const response = await request(app).get("/questions-stats");
+      // Mock the response object
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn()
+      };
 
-      expect(response.status).toBe(500);
-      expect(response.body).toEqual({ error: "Database error" });
+      // Call the controller function
+      await show({}, res);
+
+      // Assertions
+      expect(Submission.getQuestionsStats).toHaveBeenCalled();
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith({ error: errorMessage });
     });
   });
 
-  describe("POST /submissions", () => {
-    it("should create a new submission", async () => {
-      const mockSubmission = { user_id: 1, question_id: 1, outcome: true };
-      const createdSubmission = { ...mockSubmission, id: 1 };
+  describe('create', () => {
+    it('should create a new submission', async () => {
+      const mockSubmissionData = { user_id: 1, question_id: 1, outcome: true };
+      const createdSubmission = { ...mockSubmissionData, submission_id: 1 };
       Submission.create.mockResolvedValue(createdSubmission);
 
-      const response = await request(app)
-        .post("/submissions")
-        .send(mockSubmission);
+      // Mock the request and response objects
+      const req = { body: mockSubmissionData, user: 1 };
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn()
+      };
 
-      expect(response.status).toBe(201);
-      expect(response.body).toEqual({ newSubmission: createdSubmission });
+      // Call the controller function
+      await create(req, res);
+
+      // Assertions
+      expect(Submission.create).toHaveBeenCalledWith({ ...mockSubmissionData, user_id: 1 });
+      expect(res.status).toHaveBeenCalledWith(201);
+      expect(res.json).toHaveBeenCalledWith({ newSubmission: createdSubmission });
     });
 
-    it("should handle errors", async () => {
-      Submission.create.mockRejectedValue(new Error("Creation error"));
+    it('should handle errors', async () => {
+      const errorMessage = 'Creation error';
+      Submission.create.mockRejectedValue(new Error(errorMessage));
 
-      const response = await request(app)
-        .post("/submissions")
-        .send({ user_id: 1, question_id: 1, outcome: true });
+      // Mock the request and response objects
+      const req = { body: { user_id: 1, question_id: 1, outcome: true }, user: 1 };
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn()
+      };
 
-      expect(response.status).toBe(500);
-      expect(response.body).toEqual({ error: "Creation error" });
+      // Call the controller function
+      await create(req, res);
+
+      // Assertions
+      expect(Submission.create).toHaveBeenCalledWith({ ...req.body, user_id: 1 });
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith({ error: errorMessage });
     });
   });
 });
