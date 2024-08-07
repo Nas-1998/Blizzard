@@ -110,7 +110,7 @@ class gameState {
     if (this.eventIndex >= this.event.length) {
       return -1;
     } else {
-      await fetchForQuestions(this.event[this.eventIndex].event_id);
+      await this.fetchForQuestions(this.event[this.eventIndex].event_id);
       return this.question;
     }
   }
