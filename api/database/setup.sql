@@ -46,7 +46,7 @@ CREATE TABLE question (
   answer_id INT,
   event_id INT,
   score INT,
-  answer_description  VARCHAR(500),
+  answer_description  VARCHAR(600),
   PRIMARY KEY(question_id),
   FOREIGN KEY (answer_id) REFERENCES answers(answer_id),
   FOREIGN KEY (event_id) REFERENCES events(event_id)

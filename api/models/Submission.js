@@ -1,23 +1,28 @@
 const db = require("../database/connect");
 
 class Submission {
-  constructor(user_id, question_id, outcome) {
+  constructor(user_id, question_id, outcome, submission_id) {
     this.user_id = user_id;
     this.question_id = question_id;
     this.outcome = outcome;
+    this.submission_id = submission_id;
   }
 
   static async create({ question_id, user_id, outcome }) {
+    try {
     const newSubmission = await db.query(
-      "INSERT INTO submission (user_id, question_id , outcome) VALUES ($1, $2 , $3) RETURNING *",
+      "INSERT INTO submission (user_id, question_id, outcome) VALUES ($1, $2 , $3) RETURNING *",
       [user_id, question_id, outcome]
     );
 
-    if (newSubmission.rows.length !== 1)
+    if (newSubmission.rows.length !== 1) {
       throw new Error("Error creating new submission");
-
+    }
     return new Submission(newSubmission.rows[0]);
+  } catch (error) {
+    throw new Error("Error creating new submission");
   }
+}
 
   static async getQuestionsStats() {
     const result = await db.query(
@@ -37,6 +42,8 @@ class Submission {
     );
 
     return result.rows;
+  } catch (error) {
+    throw new Error("Error fetching stats");
   }
 }
 
