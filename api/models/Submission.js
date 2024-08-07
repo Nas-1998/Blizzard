@@ -1,7 +1,7 @@
 const db = require("../database/connect");
 
 class Submission {
-  constructor(user_id, question_id, outcome, submission_id) {
+  constructor({user_id, question_id, outcome, submission_id}) {
     this.user_id = user_id;
     this.question_id = question_id;
     this.outcome = outcome;
@@ -25,6 +25,7 @@ class Submission {
 }
 
   static async getQuestionsStats() {
+    try {
     const result = await db.query(
       `SELECT
       q.question_id,
@@ -45,6 +46,7 @@ class Submission {
   } catch (error) {
     throw new Error("Error fetching stats");
   }
+}
 }
 
 module.exports = Submission;
