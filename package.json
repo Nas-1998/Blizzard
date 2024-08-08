@@ -1,10 +1,7 @@
 {
-<<<<<<< HEAD
   "devDependencies": {
-    "jest": "^29.7.0"
-=======
+    "jest": "^29.7.0"},
   "dependencies": {
     "bootstrap": "^5.3.3"
->>>>>>> dev
   }
 }

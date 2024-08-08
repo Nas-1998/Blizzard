@@ -27,7 +27,7 @@ describe("login.html", () => {
     let document;
     let window;
 
-    beforeEach(async () => {
+   beforeEach(async () => {
         dom = await renderDom("login.html");
         document = dom.window.document;
         window = dom.window;
@@ -38,7 +38,7 @@ describe("login.html", () => {
                 ok: true,
                 json: () => Promise.resolve({ token: 'mocked_token' }),
             })
-        );
+        ); 
     });
 
     afterEach(() => {
