@@ -1,7 +1,8 @@
 const db = require("../database/connect");
 
 class Submission {
-  constructor(user_id, question_id, outcome) {
+  constructor({ submission_id, user_id, question_id, outcome }) {
+    this.submission_id = submission_id;
     this.user_id = user_id;
     this.question_id = question_id;
     this.outcome = outcome;

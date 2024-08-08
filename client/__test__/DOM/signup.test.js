@@ -21,14 +21,14 @@ const renderDom = async (filename) => {
     }
 };
 
-describe("login.html", () => {
+describe("signup.html", () => {
 
     let dom;
     let document;
     let window;
 
-   beforeEach(async () => {
-        dom = await renderDom("login.html");
+    beforeEach(async () => {
+        dom = await renderDom("signup.html");
         document = dom.window.document;
         window = dom.window;
 
@@ -38,15 +38,15 @@ describe("login.html", () => {
                 ok: true,
                 json: () => Promise.resolve({ token: 'mocked_token' }),
             })
-        ); 
+        );
     });
 
     afterEach(() => {
         jest.restoreAllMocks();
     });
 
-    it('should have a form with id "loginForm"', () => {
-        const form = document.getElementById('loginForm');
+    it('should have a form with id "signupForm"', () => {
+        const form = document.getElementById('signupForm');
         expect(form).toBeTruthy();
     });
 
@@ -73,13 +73,13 @@ describe("login.html", () => {
     });
 
     it('should trigger form submission when the submit button is clicked', () => {
-        const form = document.getElementById('loginForm');
+        const form = document.getElementById('signupForm');
         const submitButton = document.querySelector('button[type="submit"]');
 
         // Spy on the form's submit method
         const submitSpy = jest.fn();
         form.addEventListener('submit', (e) => {
-            e.preventDefault(); // Prevent default form submission
+            e.preventDefault(); // Prevent the default form submission
             submitSpy(); // Call the spy function
         });
 
@@ -96,7 +96,7 @@ describe("login.html", () => {
     });
 
     it('should handle the form submission event correctly', async () => {
-        const form = document.getElementById('loginForm');
+        const form = document.getElementById('signupForm');
         const usernameInput = document.getElementById('username');
         const passwordInput = document.getElementById('password');
 
@@ -109,7 +109,7 @@ describe("login.html", () => {
             e.preventDefault(); // Prevent the default form submission
             // Ensure fetch is called
             expect(global.fetch).toHaveBeenCalledWith(
-                "https://blizzard-5jur.onrender.com/users/login",
+                "https://blizzard-5jur.onrender.com/users/signup",
                 {
                     method: "POST",
                     headers: {
