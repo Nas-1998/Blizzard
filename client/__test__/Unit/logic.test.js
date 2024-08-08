@@ -472,4 +472,103 @@ describe("gameState", () => {
       expect(console.error).toHaveBeenCalledWith(mockError);
     });
   });
+
+  describe("sendHighScore", () => {
+    beforeEach(() => {
+      jest.clearAllMocks();
+      localStorage.getItem.mockReturnValueOnce("123");
+    });
+
+    it("Fetch Post request", async () => {
+      const mockGame = new gameState();
+      mockGame.score = 10;
+
+      const mockOptions = {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: "123",
+        },
+        body: JSON.stringify({
+          highscore: 10,
+        }),
+      };
+
+      fetch.mockResolvedValueOnce({ json: mockJson, ok: true });
+
+      await mockGame.sendHighscore();
+
+      expect(fetch).toHaveBeenCalledTimes(1);
+      expect(fetch).toHaveBeenCalledWith(
+        `${remoteAPI}/users/highscore`,
+        mockOptions
+      );
+    });
+
+    it("Console logs error when fetch fails", async () => {
+      const mockGame = new gameState();
+      mockGame.score = 10;
+
+      const mockOptions = {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: "123",
+        },
+        body: JSON.stringify({
+          highscore: 10,
+        }),
+      };
+
+      const mockError = new Error("Error Submitting the new highscore");
+      fetch.mockResolvedValueOnce({ ok: false });
+
+      await mockGame.sendHighscore();
+
+      expect(fetch).toHaveBeenCalledTimes(1);
+      expect(fetch).toHaveBeenCalledWith(
+        `${remoteAPI}/users/highscore`,
+        mockOptions
+      );
+      expect(console.error).toHaveBeenCalledTimes(1);
+      expect(console.error).toHaveBeenCalledWith(mockError);
+    });
+  });
+
+  describe("checkForHighscore", () => {
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+
+    it("Does not call sendHighscore when score i lower than user_highscore", () => {
+      const mockGame = new gameState();
+      mockGame.user_highscore = 10;
+      mockGame.score = 5;
+
+      jest
+        .spyOn(gameState.prototype, "sendHighscore")
+        .mockResolvedValueOnce({});
+
+      const result = mockGame.checkForHighScore();
+
+      expect(gameState.prototype.sendHighscore).toHaveBeenCalledTimes(0);
+    });
+
+    it("Calls sendHighscore when there is a new highscore", () => {
+      const mockGame = new gameState();
+      mockGame.user_highscore = 10;
+      mockGame.score = 5;
+
+      jest
+        .spyOn(gameState.prototype, "sendHighscore")
+        .mockResolvedValueOnce({});
+
+      const result = mockGame.checkForHighScore();
+
+      expect(gameState.prototype.sendHighscore).toHaveBeenCalledTimes(0);
+    });
+  });
 });
