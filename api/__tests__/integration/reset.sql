@@ -53,3 +53,13 @@ VALUES
 (1,1,1,10,'Question description event id 1'),
 (1,1,2,10,'Question description event id 2'),
 (1,1,3,10,'Question description event id 3');
+
+INSERT INTO users (username , password , role , highscore)
+VALUES
+('user1','password','user',10);
+
+INSERT INTO submission (question_id,user_id,outcome)
+VALUES
+(1,1,true),
+(1,1,false),
+(2,1,true);

@@ -1,7 +1,12 @@
 const db = require("../database/connect");
 
 class Submission {
+<<<<<<< HEAD
   constructor({user_id, question_id, outcome, submission_id}) {
+=======
+  constructor({ submission_id, user_id, question_id, outcome }) {
+    this.submission_id = submission_id;
+>>>>>>> c67f8d68c34cd61e938c607194890b10a1f10cfc
     this.user_id = user_id;
     this.question_id = question_id;
     this.outcome = outcome;
@@ -27,8 +32,9 @@ class Submission {
   static async getQuestionsStats() {
     try {
     const result = await db.query(
-      `SELECT
+      ` SELECT
       q.question_id,
+      c.character_name,
       q.question_description,
       COALESCE(
         (SUM(CASE WHEN s.outcome = TRUE THEN 1 ELSE 0 END) * 100.0 / NULLIF(COUNT(s.submission_id), 0)),
@@ -38,8 +44,10 @@ class Submission {
       submission s
     JOIN
       question q ON s.question_id = q.question_id
+    JOIN events e ON q.event_id = e.event_id
+    JOIN characters c on e.character_id = c.character_id
     GROUP BY
-      q.question_id, q.question_description`
+      q.question_id, q.question_description,c.character_name`
     );
 
     return result.rows;

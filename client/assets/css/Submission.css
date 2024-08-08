@@ -1,0 +1,55 @@
+body {
+  
+  background-position: center;
+  background-color: rgba(139, 139, 139, 0.1);
+}
+
+.character_name {
+  font-size: 1.5rem;
+  font-family: "Lato", sans-serif;
+  margin-left: 10px;
+  font-weight: 700;
+  text-align: center;
+  padding: 2%;
+  
+}
+
+.percentage_text {
+  font-family: "Lato", sans-serif;
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: rgb(0, 160, 0);
+  text-align: center;
+}
+
+.question_description {
+  font-family: "Lato", sans-serif;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.container mt-4 {
+  background-color: aqua;
+  border: none;
+}
+
+.submissions {
+  padding-top: 2%;
+  font-family: "Lato", sans-serif;
+  /* color: aliceblue; */
+  font-weight: 700;
+  font-size: 2rem;
+  text-align: center;
+
+}
+
+.row-md-4 {
+  background-color: rgba(139, 139, 139, 0.1);
+  
+}
+
+.card {
+  /* background-color: aqua; */
+  border: none !important;
+  
+}

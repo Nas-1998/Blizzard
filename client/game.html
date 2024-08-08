@@ -13,6 +13,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div class="loader-background">
+    <div class="spinner"></div>
+  </div>
 <section class="fullcontainer" id="bg-container">
     <div class="container text-center">
     <content class="text">
@@ -42,36 +45,83 @@
     <div class="modal-dialog modal-dialog-centered modal-fullscreen">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="winModalLabel">Win</h5>
+          <h5 class="modal-title" id="winModalLabel"></h5>
         </div>
         <!-- SORT VISUALS -->
         <div class="modal-body">
-          <h6> Congratulations you have completed the game. </h6>
-          <p> You were a successful advisor</p>
-          <a href="characters.html" style="text-decoration: none; color: inherit;"> Play Again</a>
-        </div>
-      </div>
-    </div>
-  </div>
-<!-- Gameover Modal-->
-
-
-<div class="modal fade" id="gameoverModal" tabindex="-1" aria-labelledby="gameoverLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-fullscreen">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="gameoverLabel">Game Over</h5>
-        </div>
-        <!-- SORT VISUALS -->
-        <div class="modal-body">
-          <h6> YOU HAVE FAILED ...... </h6>
-          <p> GAME OVER</p>
-          <a href="characters.html" style="text-decoration: none; color: inherit;"> Try Again</a>
+          <h4 modalh4> You Won! </h4>
+          <p class="modalp"> Congratulations! You were a successful advisor and are due a promotion...</p>
+          <button class="playagain"><a href="characters.html" style="text-decoration: none; color: inherit;"> Play Again</a></button>
         </div>
       </div>
     </div>
   </div>
   
+<!-- Gameover Modal-->
+
+<div class="modal fade" id="gameoverModal" tabindex="-1" aria-labelledby="gameoverLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="gameoverLabel"></h5>
+        </div>
+        <!-- SORT VISUALS -->
+        <div class="modal-body">
+          <h4 class="modalh4"> You Have Failed!</h4>
+          <p class="modalp"> You have been sent to the dungeon never to be seen again...</p>
+          <button class="tryagain"><a href="characters.html" style="text-decoration: none; color: inherit;"> Try Again</a></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Answer Description Modal -->
+
+  <div class="modal fade" id="answerModal" tabindex="-1" aria-labelledby="answerLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="answerLabel"></h5>
+        </div>
+        <!-- SORT VISUALS -->
+        <div class="modal-body">
+          <h6></h6>
+          <div class="lives_container">
+            <p class="lives_text">Lives remaining</p>
+            <div class="lives"></div>
+          </div>
+          <p class="answer">Answer</p>
+          <p class="correct_answer"></p>
+          <p class="explanation">Explanation</p>
+          <p class="answer_description"></p>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  
+    <!-- Answer Description Modal change for right and wrong-->
+
+    <!-- <div class="modal fade" id="wrongAnswerModal" tabindex="-1" aria-labelledby="wrongAnswerLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="wrongAnswerLabel">Answer</h5>
+          </div> -->
+          <!-- SORT VISUALS -->
+          <!-- <div class="modal-body">
+            <h6> Answer </h6>
+            <p> : </p>
+            <a href="characters.html" style="text-decoration: none; color: inherit;"> Try Again</a>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    
 
     
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

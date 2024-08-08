@@ -73,7 +73,7 @@ describe("Question model", () => {
       expect(answers[0]).toBeInstanceOf(Answer);
       expect(db.query).toHaveBeenCalledTimes(1);
       expect(db.query).toHaveBeenCalledWith(
-        "SELECT answers , answer_id FROM answers WHERE question_id = $1",
+        "SELECT * FROM answers WHERE question_id = $1",
         [mockQuestion.question_id]
       );
     });

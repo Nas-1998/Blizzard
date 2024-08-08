@@ -10,6 +10,7 @@ body {
     /* font-family: "Zen Antique Soft", serif; */
     height: 100vh;
     display: flex;
+    text-align: center;
     align-items: center;
     justify-content: center;
     background-size: contain;
@@ -28,25 +29,36 @@ body {
    }
 
 p {
-    padding: 10% 0%;
+    padding: 5% 0%;
     font-size: 2rem;
     font-weight: 600;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 h1 {
-    font-size: 6rem;
+    font-size: 5rem;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
     
 }
 
+.instructions {
+    font-family: "Lato", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    text-shadow: 0px 0px 0px;
+    padding: 1%;;
+}
+
+
 #instructionsLabel .modal-content {
+ 
     height: 100%;
     border-radius: 0;
     background-color: black;
 }
 
 #instructionsLabel .modal-body {
+    
     overflow-y: auto;
     color: red;
 }

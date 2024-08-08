@@ -31,7 +31,6 @@ app.use("/users", usersRouter);
 app.use("/questions", questionsRouter);
 app.use("/characters", charactersRouter);
 app.use("/events", eventsRouter);
-app.use("/users", usersRouter);
 app.use("/submissions", submissionsRouter);
 
 module.exports = app;

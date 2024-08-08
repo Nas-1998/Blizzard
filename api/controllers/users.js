@@ -9,7 +9,7 @@ const login = async (req, res) => {
     const user = await User.findByUsername(data.username);
 
     const match = await bcrypt.compare(data.password, user.password);
-
+    console.log("match", match);
     if (!match) throw new Error("Unable to authenticate");
 
     jwt.sign(

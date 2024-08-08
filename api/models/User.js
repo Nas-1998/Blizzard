@@ -19,7 +19,6 @@ class User {
     if (query.rows.length !== 1) {
       throw new Error("Unable to authenticate user");
     }
-
     return new User(query.rows[0]);
   }
 
