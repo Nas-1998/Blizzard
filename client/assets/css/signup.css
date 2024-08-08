@@ -10,7 +10,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url("../images/login.png") no-repeat center center fixed;
+  background: url("../images/loginbg.jpg") no-repeat center center fixed;
   background-size: cover;
 }
 
@@ -24,7 +24,7 @@ body {
 }
 
 .form-container {
-  background-color: rgba(255, 255, 255, 0); /* Fully transparent background */
+  background-color: rgba(0, 0, 0, 0.6); /* Fully transparent background */
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -41,11 +41,12 @@ body {
 h1 {
   text-align: center;
   margin-bottom: 20px;
-  color: #004d40; /* Dark green, matching the theme */
+  color: #fff;
 }
 
 .input-group {
   margin-bottom: 15px;
+  color: #fff;
 }
 
 input[type="text"],
@@ -54,7 +55,7 @@ input[type="password"] {
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
-  color: #004d40; /* Dark green text color */
+  color: #fff;
   background-color: rgba(
     255,
     255,
@@ -66,12 +67,9 @@ input[type="password"] {
 button {
   width: 100%;
   padding: 10px;
-  background: linear-gradient(
-    135deg,
-    #00bcd4,
-    #004d40
-  ); /* Turquoise watercolor effect */
+  background: linear-gradient(135deg, rgba(255, 225, 0, 1), rgba(255, 4, 0, 1));
   color: white;
+  font-weight: 600;
   border: none;
   border-radius: 4px;
   font-size: 16px;
@@ -81,21 +79,24 @@ button {
 }
 
 button:hover {
-  background: linear-gradient(
+  background: rgba(255, 135, 0, 1);
+  /* transition: background 0.3s ease; */
+  /* background: linear-gradient(
     135deg,
-    #004d40,
-    #00bcd4
-  ); /* Inverted colors on hover */
+    rgba(255, 4, 0, 1),
+    rgba(0, 0, 0, 1)
+  ); Inverted colors on hover */
 }
 
 p {
   text-align: center;
   margin-top: 15px;
-  color: #004d40; /* Dark green color for the text */
+  color: #fff;
+  font-weight: bold;
 }
 
 a {
-  color: #007bff;
+  color: rgba(255, 135, 0, 1);
   text-decoration: none;
 }
 

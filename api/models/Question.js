@@ -6,11 +6,13 @@ class Question {
     question_id,
     question_description,
     answer_id,
+    answer_description,
     event_id,
     score,
   }) {
     this.question_id = question_id;
     this.question_description = question_description;
+    this.answer_description = answer_description;
     this.answer_id = answer_id;
     this.event_id = event_id;
     this.score = score;
@@ -29,7 +31,7 @@ class Question {
 
   async getAnswers() {
     const answers = await db.query(
-      "SELECT answers , answer_id FROM answers WHERE question_id = $1",
+      "SELECT * FROM answers WHERE question_id = $1",
       [this.question_id]
     );
 

@@ -30,20 +30,23 @@ describe("questions controller", () => {
       const mockAnswers = [
         {
           answer_id: 1,
-          answers:
+          question_id: 1,
+          answers_text:
             "Side with Pompey, that way he gains further military power through his help.",
         },
         {
           answer_id: 2,
-          answers:
+          question_id: 1,
+          answer_text:
             "Form an alliance with Crassus to gain further wealth and influence over the land, allowing him to garner further support later.",
         },
         {
           answer_id: 3,
-          answers:
+          question_id: 1,
+          answer_text:
             "Take the chance in forming an alliance with both men which could be risky.",
         },
-      ];
+      ].map((a) => new Answer(a));
 
       const mockReq = { params: { eventId: 1 } };
       jest
@@ -51,7 +54,7 @@ describe("questions controller", () => {
         .mockResolvedValueOnce(new Question(mockQuestion)),
         jest
           .spyOn(Question.prototype, "getAnswers")
-          .mockResolvedValueOnce(mockAnswers.map((a) => new Answer(a))),
+          .mockResolvedValueOnce(mockAnswers),
         await questionsController.show(mockReq, mockRes);
 
       expect(mockStatus).toHaveBeenCalledTimes(1);

@@ -18,8 +18,8 @@ CREATE TABLE users (
 CREATE TABLE characters (
   character_id INT GENERATED ALWAYS AS IDENTITY,
   character_name TEXT,
-  birth_year INT,
-  image_url VARCHAR(255),
+  birth_year VARCHAR(255),
+  image_url TEXT,
   PRIMARY KEY(character_id)
 );
 
@@ -35,7 +35,7 @@ CREATE TABLE events (
 
 CREATE TABLE answers (
   answer_id INT GENERATED ALWAYS AS IDENTITY,
-  answer_text VARCHAR(500) NOT NULL,
+  answer_text TEXT NOT NULL,
   question_id INT,
   PRIMARY KEY(answer_id)
 );
@@ -46,7 +46,11 @@ CREATE TABLE question (
   answer_id INT,
   event_id INT,
   score INT,
+<<<<<<< HEAD
   answer_description  VARCHAR(600),
+=======
+  answer_description  TEXT,
+>>>>>>> dev
   PRIMARY KEY(question_id),
   FOREIGN KEY (answer_id) REFERENCES answers(answer_id),
   FOREIGN KEY (event_id) REFERENCES events(event_id)
@@ -64,8 +68,10 @@ CREATE TABLE submission (
 
 INSERT INTO characters (character_name, birth_year, image_url) 
 VALUES
-('Julius Caesar', -100, 'https://simplycharly.com/wp-content/uploads/2022/07/caesar-scaled.jpeg');
-
+('Julius Caesar', '100 BC', 'https://mbwxnezvgzfbldgfkvim.supabase.co/storage/v1/object/sign/images/miniceaser.jpeg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvbWluaWNlYXNlci5qcGVnIiwiaWF0IjoxNzIzMTAzNzA4LCJleHAiOjE3NTQ2Mzk3MDh9.p3wVzzZzh7iefsnskShusYNviuDktpyIG73ocIqI2bM&t=2024-08-08T07%3A55%3A08.548Z'),
+('Cleopatra', '69 BC', ''),
+('Alexander the great', '356 BC', ''),
+('Placeholder', '', '');
 
 INSERT INTO events (character_id, event_date, bg_image_url, char_image_url) 
 VALUES 

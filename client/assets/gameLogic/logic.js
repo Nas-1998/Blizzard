@@ -91,13 +91,20 @@ class gameState {
   async checkForAnswers(id) {
     this.eventIndex += 1;
 
-    if (this.question.answer_id < id) {
+    if (this.question.answer_id === id) {
       this.score += this.question.score;
       return true;
       // this.event.length === this.eventIndex
     } else {
       this.lives -= 1;
       return false;
+    }
+  }
+
+  async checkForHighScore() {
+    if (this.score > this.user_highscore) {
+      await this.sendHighscore();
+    } else {
     }
   }
 
@@ -110,26 +117,56 @@ class gameState {
     }
   }
 
+  async sendHighscore() {
+    try {
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: localStorage.getItem("token"),
+        },
+        body: JSON.stringify({
+          highscore: this.score,
+        }),
+      };
+
+      const response = await fetch(
+        "https://blizzard-5jur.onrender.com/users/highscore",
+        options
+      );
+
+      if (!response.ok) {
+        throw new Error("Error Submitting the new highscore");
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   async sendSubmission(outcome) {
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: localStorage.getItem("token"),
-      },
-      body: JSON.stringify({
-        question_id: this.question.question_id,
-        outcome: outcome,
-      }),
-    };
+    try {
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: localStorage.getItem("token"),
+        },
+        body: JSON.stringify({
+          question_id: this.question.question_id,
+          outcome: outcome,
+        }),
+      };
 
-    const response = await fetch(
-      "https://blizzard-5jur.onrender.com/submissions/",
-      options
-    );
+      const response = await fetch(
+        "https://blizzard-5jur.onrender.com/submissions/",
+        options
+      );
 
-    if (!response.ok) {
-      console.log("Error to create submission");
+      if (!response.ok) {
+        throw new Error("Error submitting the answer");
+      }
+    } catch (err) {
+      console.error(err);
     }
   }
 

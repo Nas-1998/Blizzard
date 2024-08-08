@@ -21,7 +21,6 @@ answersContainer.addEventListener("click", async function (e) {
 
   game.checkGameState();
 
-  console.log(game.state, game.lives);
   if (game.state === "running") {
     await game.fetchNextQuestion();
     updateQuestion();
@@ -50,7 +49,8 @@ const updateQuestion = () => {
   questionDescription.textContent = question.question_description;
   question.answers.forEach((answer, i) => {
     const thElement = quizOptions[i].querySelector(".option-descrition");
-    thElement.innerHTML = answer.answers;
+    console.log(answer);
+    thElement.innerHTML = answer.answer_text;
     quizOptions[i].dataset.answerId = answer.answer_id;
   });
 };

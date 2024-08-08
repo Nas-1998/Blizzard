@@ -1,7 +1,7 @@
 class Answer {
-  constructor({ answer_id, answers, question_id }) {
+  constructor({ answer_id, answer_text, question_id }) {
     this.answer_id = answer_id;
-    this.answers = answers;
+    this.answer_text = answer_text;
     this.question_id = question_id;
   }
 }

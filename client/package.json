@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll",
+    "test": "jest --watchAll --verbose",
     "coverage": "jest --coverage",
     "watch": "start watchify ./assets/gameLogic/controller.js -o assets/dist/gameBundle.js && start watchify ./assets/js/characters.js -o ./assets/dist/charactersBundle.js"
   },

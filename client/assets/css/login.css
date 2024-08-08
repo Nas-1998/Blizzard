@@ -10,7 +10,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url("../images/login.png") no-repeat center center fixed;
+  background: url("../images/loginbg.jpg") no-repeat center center fixed;
   background-size: cover;
 }
 
@@ -24,7 +24,7 @@ body {
 }
 
 .form-container {
-  background-color: rgba(255, 255, 255, 0); /* Fully transparent background */
+  background-color: rgba(0, 0, 0, 0.6); /* Fully transparent background */
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -39,13 +39,17 @@ body {
 }
 
 h1 {
+  font-family: "Libre Baskerville", serif;
+  font-weight: 500;
   text-align: center;
   margin-bottom: 20px;
-  color: #4d0012; /* Dark green, matching the theme */
+  color: #fff;
 }
 
 .input-group {
+  font-family: "Lato", sans-serif;
   margin-bottom: 15px;
+  color: #fff;
 }
 
 input[type="text"],
@@ -54,7 +58,7 @@ input[type="password"] {
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
-  color: #4d1e00;
+  color: #fff;
   background-color: rgba(
     255,
     255,
@@ -64,10 +68,12 @@ input[type="password"] {
 }
 
 button {
+  font-family: "Lato", sans-serif;
   width: 100%;
   padding: 10px;
-  background: linear-gradient(135deg, #00bcd4, #004d40);
+  background: linear-gradient(135deg, rgba(255, 135, 0, 1), rgb(255, 60, 57));
   color: white;
+  font-weight: 600;
   border: none;
   border-radius: 4px;
   font-size: 16px;
@@ -77,22 +83,24 @@ button {
 }
 
 button:hover {
-  background: linear-gradient(
+  background: rgb(179, 16, 16);
+  /* transition: background 0.3s ease; */
+  /* background: linear-gradient(
     135deg,
-    #4d0012,
-    #1b5b3a
-  ); /* Inverted colors on hover */
+    rgba(255, 4, 0, 1),
+    rgba(0, 0, 0, 1)
+  ); Inverted colors on hover */
 }
 
 p {
   text-align: center;
   margin-top: 15px;
-  color: #4d0012;
+  color: #fff;
   font-weight: bold;
 }
 
 a {
-  color: #7111e7;
+  color: rgba(255, 135, 0, 1);
   text-decoration: none;
 }
 
