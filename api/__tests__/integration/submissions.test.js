@@ -1,16 +1,13 @@
-
 const express = require("express");
-const request = require("supertest"); 
+const request = require("supertest");
 const app = express();
-const Submission = require("../../../models/Submission");
-const { create, show } = require("../../../controllers/submissions");
+const Submission = require("../../models/Submission");
+const { create, show } = require("../../controllers/submissions");
 
 app.use(express.json());
 
-
 app.get("/questions-stats", show);
 app.post("/submissions", create);
-
 
 jest.mock("../../../models/Submission");
 
@@ -21,7 +18,13 @@ describe("Submission Controller", () => {
 
   describe("GET /questions-stats", () => {
     it("should return an array of question statistics", async () => {
-      const mockStats = [{ question_id: 1, question_description: "Sample question", percentage_correct: 75 }];
+      const mockStats = [
+        {
+          question_id: 1,
+          question_description: "Sample question",
+          percentage_correct: 75,
+        },
+      ];
       Submission.getQuestionsStats.mockResolvedValue(mockStats);
 
       const response = await request(app).get("/questions-stats");
@@ -31,7 +34,9 @@ describe("Submission Controller", () => {
     });
 
     it("should handle errors", async () => {
-      Submission.getQuestionsStats.mockRejectedValue(new Error("Database error"));
+      Submission.getQuestionsStats.mockRejectedValue(
+        new Error("Database error")
+      );
 
       const response = await request(app).get("/questions-stats");
 
