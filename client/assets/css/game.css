@@ -1,0 +1,315 @@
+/*  This currently has no affect on the game. */
+body {
+  background-color: black;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader-background {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: black;
+  z-index: 100000;
+}
+
+.spinner {
+  width: 100px;
+  padding: 15px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: red; /* CHANGE SPINNER COLOR*/
+  --_m: conic-gradient(#0000 10%, #000), linear-gradient(#000 0 0) content-box;
+  -webkit-mask: var(--_m);
+  mask: var(--_m);
+  -webkit-mask-composite: source-out;
+  mask-composite: subtract;
+  animation: s3 1s infinite linear;
+}
+@keyframes s3 {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+/* This is the outer most part of the game that contains all elements */
+.fullcontainer {
+  width: 100%;
+  height: 90vh;
+  padding-top: 0%;
+  background-image: url("../images/background1.jpg");
+  background-size: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: black;
+  border-radius: 5px;
+  text-align: center;
+  background-position: center;
+  overflow: hidden;
+  position: relative;
+  /* border-radius: 5px; */
+}
+
+#char-img {
+  background-image: url("https://mbwxnezvgzfbldgfkvim.supabase.co/storage/v1/object/sign/images/event3-char%20(1).png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvZXZlbnQzLWNoYXIgKDEpLnBuZyIsImlhdCI6MTcyMzAzOTA0MCwiZXhwIjoxNzU0NTc1MDQwfQ.7Z-f_vPZYU0Ei-aNj_Bq9qOI-oLk1wPzvm28BZnRtOY&t=2024-08-07T13%3A57%3A20.932Z");
+  height: 100vh;
+  background-position: center top;
+  /* background-size: 100% 100%; */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* This is purely the text part of the game */
+
+#textbox {
+  background-color: rgba(254, 238, 238, 0.7);
+  border-radius: 5px;
+  margin: 2%;
+  padding: 2%;
+}
+
+#textbox h1 {
+  font-family: "Libre Baskerville", serif;
+  font-weight: 900;
+  font-size: 2.5rem;
+}
+
+#textbox p {
+  font-family: "Lato", sans-serif;
+  padding: 2% 0%;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+#textbox tr {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 1.1rem;
+  
+}
+
+tr .option-descrition{
+  padding: 2.5%;
+}
+
+#table th {
+  --bs-table-bg: rgba(37, 37, 37, 1);
+  color: rgba(255, 255, 255, 1);
+  border-radius: 5px;
+  /* padding: 0%; */
+  border-spacing: 0 10px;
+}
+
+#table tr {
+  border-radius: 5px;
+  border-spacing: 0 10px;
+}
+
+#table th:hover {
+  cursor: pointer;
+  background-color: rgba(105, 0, 0, 1);
+}
+
+/* You have lost modal */
+
+#gameoverModal .modal-content {
+  height: 100%;
+  border-radius: 0;
+  background-color: black;
+  background: url("../images/losebg.jpg");
+  background-position: center;
+  background-size: contain;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.tryagain {
+  color: aliceblue;
+  font-family: "Lato", sans-serif;
+  font-size: 1.4rem;
+  background: rgb(179, 16, 16);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease;
+  border: none;
+  margin: 0.2vh;
+  font-weight: 600;
+  padding: 1.5% 5%;
+  border-radius: 10px;
+}
+
+.tryagain:hover {
+  background: rgb(110, 0, 0);
+}
+
+#gameoverModal .modal-body h4,
+p {
+  padding-bottom: 5%;
+}
+
+#gameoverModal .modal-body h4 {
+  font-family: "Libre Baskerville", serif;
+  font-weight: 900;
+  font-size: 5rem;
+  color: rgb(179, 16, 16);
+  text-shadow: 5px 5px 5px rgb(0, 0, 0);
+}
+
+#gameoverModal .modal-body p {
+  color: white;
+  text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8);
+  font-family: "Lato", sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+#gameoverModal .modal-body {
+  padding: 2%;
+  overflow-y: auto;
+  /* color: red; */
+}
+
+/* You have won modal */
+
+#winModal .modal-content {
+  height: 100%;
+  border-radius: 0;
+  background-color: black;
+  background: url("../images/winbg.jpg");
+  background-position: center;
+  background-size: cover;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.playagain {
+  color: aliceblue;
+  font-family: "Lato", sans-serif;
+  font-size: 1.4rem;
+  background: rgba(255, 135, 0, 1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease;
+  border: none;
+  margin: 0.2vh;
+  font-weight: 600;
+  padding: 1.5% 5%;
+  border-radius: 10px;
+}
+
+.playagain:hover {
+  background: rgb(179, 16, 16);
+}
+
+#winModal .modal-body h4,
+p {
+  padding-bottom: 5%;
+}
+
+#winModal .modal-body h4 {
+  font-family: "Libre Baskerville", serif;
+  font-weight: 900;
+  font-size: 5rem;
+  color: rgba(255, 135, 0, 1);
+  text-shadow: 5px 5px 5px rgba(0, 0, 0, 1);
+}
+
+#winModal .modal-body p {
+  color: white;
+  text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8);
+  font-family: "Lato", sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+#winModal .modal-body {
+  width: 50%;
+  overflow-y: auto;
+  color: red;
+}
+
+.modal-fullscreen .modal-header,
+.modal-fullscreen .modal-footer {
+  border: none;
+}
+
+/*  Answer description and win point or lose point modal */
+
+#answerModal .modal-body h6 {
+  font-family: "Libre Baskerville", serif;
+  font-size: 2rem;
+  text-align: center;
+  font-weight: 700;
+  padding: 0;
+ 
+}
+
+#answerModal .modal-body {
+  padding: 0 5%;
+}
+
+#title_correct {
+  font-size: 1.4rem;
+  color: rgb(18, 212, 0);
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.6);
+}
+
+.answer, .explanation {
+  font-size: 1.4rem;
+  padding-bottom: 0%;
+  text-align: center;
+  font-weight: 700;
+}
+
+#title_wrong {
+  font-size: 1.4rem;
+  color: rgb(179, 16, 16);
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.6);
+}
+
+.lives {
+  flex-wrap: wrap;
+  flex-direction: row;
+  text-align: center; 
+}
+
+.lives_text {
+  padding: 0;
+  text-align: center;
+}
+
+.lives_heart {
+  display: inline-flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+
+  width: 10vh;
+  height: 10vh;
+  background-image: url("../images/heart.png");
+  margin: 0 auto;
+  padding: 0px;
+  background-size: contain;
+}
+
+.correct_answer {
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.answer_description {
+  font-family: "Lato", sans-serif;
+  font-size: 1.1rem;
+  text-align: center;
+  padding: 0%;
+}
+

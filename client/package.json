@@ -4,9 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watchAll --verbose",
+    "coverage": "jest --coverage",
+    "watch": "start watchify ./assets/gameLogic/controller.js -o assets/dist/gameBundle.js && start watchify ./assets/js/characters.js -o ./assets/dist/charactersBundle.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jsdom": "^24.1.1",
+    "watchify": "^4.0.0"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.3"
+  }
 }
