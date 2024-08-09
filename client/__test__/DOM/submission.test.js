@@ -3,6 +3,7 @@ const path = require('path');
 
 
 
+
 const renderDom = async (filename) => {
     const filePath = path.join(__dirname, '../..', filename);
      try {
@@ -22,6 +23,13 @@ const renderDom = async (filename) => {
      }
 };
 
+global.fetch = jest.fn(() =>
+    Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve({ token: 'mocked_token' }),
+    })
+); 
+
 describe("Submission.html", () => {
 
     let dom;
@@ -33,12 +41,6 @@ describe("Submission.html", () => {
         document = dom.window.document;
         window = dom.window;
 
-        global.fetch = jest.fn(() =>
-            Promise.resolve({
-                ok: true,
-                json: () => Promise.resolve({ token: 'mocked_token' }),
-            })
-        ); 
     });
 
     afterEach(() => {
@@ -50,6 +52,32 @@ describe("Submission.html", () => {
         expect(form).toBeTruthy();
       });
 
+    // it('should transfer the user to the index.html page', () => {
+    //     const homepage = document.querySelector('a[href="index.html"]')
+    //     expect(homepage).toBeTruthy()
 
-    });
+    //     // const mockLocation = jest.spyOn(window, 'location', 'get')
+    //     // mockLocation.mockReturnValue({
+    //     //     href: '',
+    //     //     assign: jest.fn()
+
+    
+    //     const originalLocation = window.location;
+    //     delete window.location; // Remove the original location
+    //     window.location = {
+    //         assign: jest.fn()  
+    //     }      
+    //     })
+        
+    //     const clickEvent = new window.Event('click', {
+    //         bubbles: true,
+    //         cancelable: true,
+    //         view: window
+    //     })
+    //     homepage.dispatchEvent(clickEvent);
+
+    //     expect(window.location.assign).toHaveBeenCalledWith('index.html')
+    //     window.location = originalLocation;
+    })
+    
 
